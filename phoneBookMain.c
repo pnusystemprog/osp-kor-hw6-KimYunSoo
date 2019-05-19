@@ -1,67 +1,50 @@
+
 #include <stdio.h>
+#include <string.h>
 #include "phone.h"
 
-void registerPhoneData();
-void printAll();
-void searchByName();
-void deleteByName();
+#define MAX_NUM 50
+#define BUFFER_SIZE 20
+#define PASSWORD qwerty1234
 
-static int count_service = 0;	// Total number of service requests
-
+void registerPhoneData(User *book,int *size);
+int deleteByName(User* book,int* size);
+int searchByName(User* book,int* size);
+void printAll(User* book,int* size);
 
 int main()
 {
-	int service;		// a variable for storing user's request
-	do
+	int input;
+	User user[MAX_NUM];
+	int person=0;
+
+	while(1)
 	{
-        printf("============ Telephone Book Management ============");
-        printf("\n <<<1. Register\t 2. Print All \t 3. Search by ID \t 4. Delete \t 5. Exit >>>\n");
-        printf(" Please enter your service number (1-5)> ");
-		scanf("%d", &service);
+		input='\0';
+		printf("=====Telephone Book Management=====\n");
+		printf("<<<1.Register 2.PrintAll 3.Search 4.Delete 5.Exit>>>\n");
+		scanf("%d",&input);
 
-		switch(service)
+		if(input==1)
 		{
-			case 1: registerPhoneData(); break;	// invoke find_ID
-			case 2: printAll(); break;
-            case 3: searchByName(); break;
-            case 4: deleteByName(); break;
+			registerPhoneData(user,&person);
 		}
-	} while (service != 5);	// if Exit is not entered, the loop continues
-	return 0;
-}
-
-/*****************
-** Your code..
-** This function should be implemented in register.c
-*************************/
-void registerPhoneData()
-{
-    printf("Registration\n");
-}
-
-/*****************
-** Your code..
-** This function should be implemented in search.c
-*************************/
-void printAll()
-{
-    printf("Print all contants in the PhoneBook\n");
-}
-
-/*****************
-** Your code..
-** This function should be implemented in search.c
-*************************/
-void searchByName()
-{
-    printf("Search by Name\n");
-}
-
-/*****************
-** Your code..
-** This function should be implemented in delete.c
-*************************/
-void deleteByName()
-{
-    printf("Deletion is done\n");
+		else if(input==2)
+		{
+			printAll(user,&person);
+		}
+		else if(input==3)
+		{
+			searchByName(user,&person);
+		}
+		else if(input==4)
+		{
+			deleteByName(user,&person);
+		}
+		else if(input==5)
+		{
+			printf("Bye\n");
+			break;
+		}
+	}
 }
